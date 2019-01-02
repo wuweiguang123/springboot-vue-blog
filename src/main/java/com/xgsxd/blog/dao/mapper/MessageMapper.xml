@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xgsxd.blog.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.xgsxd.blog.bean.Message">
+    <id column="message_id" jdbcType="INTEGER" property="messageId" />
+    <result column="message_name" jdbcType="VARCHAR" property="messageName" />
+    <result column="message_email" jdbcType="VARCHAR" property="messageEmail" />
+    <result column="message_time" jdbcType="TIMESTAMP" property="messageTime" />
+    <result column="message_mark" jdbcType="VARCHAR" property="messageMark" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xgsxd.blog.bean.Message">
+    <result column="message_content" jdbcType="LONGVARCHAR" property="messageContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    message_id, message_name, message_email, message_time, message_mark
+  </sql>
+  <sql id="Blob_Column_List">
+    message_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xgsxd.blog.bean.Message">
+    insert into t_message (message_id, message_name, message_email, 
+      message_time, message_mark, message_content
+      )
+    values (#{messageId,jdbcType=INTEGER}, #{messageName,jdbcType=VARCHAR}, #{messageEmail,jdbcType=VARCHAR}, 
+      #{messageTime,jdbcType=TIMESTAMP}, #{messageMark,jdbcType=VARCHAR}, #{messageContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xgsxd.blog.bean.Message">
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="messageName != null">
+        message_name,
+      </if>
+      <if test="messageEmail != null">
+        message_email,
+      </if>
+      <if test="messageTime != null">
+        message_time,
+      </if>
+      <if test="messageMark != null">
+        message_mark,
+      </if>
+      <if test="messageContent != null">
+        message_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="messageName != null">
+        #{messageName,jdbcType=VARCHAR},
+      </if>
+      <if test="messageEmail != null">
+        #{messageEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTime != null">
+        #{messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageMark != null">
+        #{messageMark,jdbcType=VARCHAR},
+      </if>
+      <if test="messageContent != null">
+        #{messageContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xgsxd.blog.bean.Message">
+    update t_message
+    <set>
+      <if test="messageName != null">
+        message_name = #{messageName,jdbcType=VARCHAR},
+      </if>
+      <if test="messageEmail != null">
+        message_email = #{messageEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTime != null">
+        message_time = #{messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageMark != null">
+        message_mark = #{messageMark,jdbcType=VARCHAR},
+      </if>
+      <if test="messageContent != null">
+        message_content = #{messageContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xgsxd.blog.bean.Message">
+    update t_message
+    set message_name = #{messageName,jdbcType=VARCHAR},
+      message_email = #{messageEmail,jdbcType=VARCHAR},
+      message_time = #{messageTime,jdbcType=TIMESTAMP},
+      message_mark = #{messageMark,jdbcType=VARCHAR},
+      message_content = #{messageContent,jdbcType=LONGVARCHAR}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xgsxd.blog.bean.Message">
+    update t_message
+    set message_name = #{messageName,jdbcType=VARCHAR},
+      message_email = #{messageEmail,jdbcType=VARCHAR},
+      message_time = #{messageTime,jdbcType=TIMESTAMP},
+      message_mark = #{messageMark,jdbcType=VARCHAR}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

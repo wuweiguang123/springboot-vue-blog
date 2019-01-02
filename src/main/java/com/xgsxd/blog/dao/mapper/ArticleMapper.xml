@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xgsxd.blog.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.xgsxd.blog.bean.Article">
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="article_summary" jdbcType="VARCHAR" property="articleSummary" />
+    <result column="article_pic" jdbcType="VARCHAR" property="articlePic" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="article_mark" jdbcType="VARCHAR" property="articleMark" />
+    <result column="article_read_num" jdbcType="INTEGER" property="articleReadNum" />
+    <result column="article_likes" jdbcType="INTEGER" property="articleLikes" />
+    <result column="article_status" jdbcType="VARCHAR" property="articleStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xgsxd.blog.bean.Article">
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    article_id, article_title, article_summary, article_pic, create_time, article_mark, 
+    article_read_num, article_likes, article_status
+  </sql>
+  <sql id="Blob_Column_List">
+    article_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xgsxd.blog.bean.Article">
+    insert into t_article (article_id, article_title, article_summary, 
+      article_pic, create_time, article_mark, 
+      article_read_num, article_likes, article_status, 
+      article_content)
+    values (#{articleId,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR}, #{articleSummary,jdbcType=VARCHAR}, 
+      #{articlePic,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{articleMark,jdbcType=VARCHAR}, 
+      #{articleReadNum,jdbcType=INTEGER}, #{articleLikes,jdbcType=INTEGER}, #{articleStatus,jdbcType=VARCHAR}, 
+      #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xgsxd.blog.bean.Article">
+    insert into t_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="articleSummary != null">
+        article_summary,
+      </if>
+      <if test="articlePic != null">
+        article_pic,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="articleMark != null">
+        article_mark,
+      </if>
+      <if test="articleReadNum != null">
+        article_read_num,
+      </if>
+      <if test="articleLikes != null">
+        article_likes,
+      </if>
+      <if test="articleStatus != null">
+        article_status,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleSummary != null">
+        #{articleSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="articlePic != null">
+        #{articlePic,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleMark != null">
+        #{articleMark,jdbcType=VARCHAR},
+      </if>
+      <if test="articleReadNum != null">
+        #{articleReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="articleLikes != null">
+        #{articleLikes,jdbcType=INTEGER},
+      </if>
+      <if test="articleStatus != null">
+        #{articleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xgsxd.blog.bean.Article">
+    update t_article
+    <set>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleSummary != null">
+        article_summary = #{articleSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="articlePic != null">
+        article_pic = #{articlePic,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleMark != null">
+        article_mark = #{articleMark,jdbcType=VARCHAR},
+      </if>
+      <if test="articleReadNum != null">
+        article_read_num = #{articleReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="articleLikes != null">
+        article_likes = #{articleLikes,jdbcType=INTEGER},
+      </if>
+      <if test="articleStatus != null">
+        article_status = #{articleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xgsxd.blog.bean.Article">
+    update t_article
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_summary = #{articleSummary,jdbcType=VARCHAR},
+      article_pic = #{articlePic,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      article_mark = #{articleMark,jdbcType=VARCHAR},
+      article_read_num = #{articleReadNum,jdbcType=INTEGER},
+      article_likes = #{articleLikes,jdbcType=INTEGER},
+      article_status = #{articleStatus,jdbcType=VARCHAR},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xgsxd.blog.bean.Article">
+    update t_article
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_summary = #{articleSummary,jdbcType=VARCHAR},
+      article_pic = #{articlePic,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      article_mark = #{articleMark,jdbcType=VARCHAR},
+      article_read_num = #{articleReadNum,jdbcType=INTEGER},
+      article_likes = #{articleLikes,jdbcType=INTEGER},
+      article_status = #{articleStatus,jdbcType=VARCHAR}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+</mapper>
