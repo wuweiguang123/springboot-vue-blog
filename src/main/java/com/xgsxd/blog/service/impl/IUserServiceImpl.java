@@ -3,13 +3,14 @@ package com.xgsxd.blog.service.impl;
 import com.xgsxd.blog.bean.User;
 import com.xgsxd.blog.dao.UserMapper;
 import com.xgsxd.blog.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class IUserServiceImpl implements IUserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override
@@ -17,7 +18,6 @@ public class IUserServiceImpl implements IUserService {
 
         User user = userMapper.queryUserByUserAccountAndUserPwd(userAccount, userPassword);
 
-
-        return null;
+        return user;
     }
 }

@@ -3,8 +3,11 @@ package com.xgsxd.blog.dao;
 import com.xgsxd.blog.bean.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
+
     int deleteByPrimaryKey(Integer userId);
 
     int insert(User record);
@@ -18,4 +21,5 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User queryUserByUserAccountAndUserPwd(@Param("userAccount")String userAccount, @Param("userPassword")String userPassword);
+
 }

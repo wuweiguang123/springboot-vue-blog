@@ -6,18 +6,24 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.ResponseWrapper;
 
 @Controller
+@RequestMapping("/")
 public class LoginController {
-@Autowired
-private IUserService userService;
+
+    @Resource
+    private IUserService userService;
+
 
     /**
      * 进入登录页面
@@ -35,22 +41,28 @@ private IUserService userService;
      * @return
      */
     @RequestMapping(value = "doLogin",method = RequestMethod.POST)
-    public ModelAndView doLogin(HttpServletRequest request){
-
-        ModelAndView model=new ModelAndView("admin-index");
+    public String doLogin(Model model, HttpServletRequest request){
         String userAccount  = request.getParameter("userAccount");
-        String userPassword =request.getParameter("userPassword");
+        String userPassword = request.getParameter("userPassword");
         User user = userService.queryUserByUserAccountAndUserPwd(userAccount, userPassword);
-        if(user!=null){
+        if(user != null){
             HttpSession session = request.getSession();
             session.setAttribute("user",user);
-            model.addObject("userInfo", user);
-
+            model.addAttribute("userInfo", user);
+            return "index";
         }else{
-            model.setViewName("login");
+            model.addAttribute("messageInfo", "用户名或密码错误");
+            return "login";
         }
 
-        return model;
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate(); //清空session
+
+        return "login";
     }
 
 }
