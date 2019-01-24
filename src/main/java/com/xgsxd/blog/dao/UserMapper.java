@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserMapper {
 
@@ -22,4 +24,20 @@ public interface UserMapper {
 
     User queryUserByUserAccountAndUserPwd(@Param("userAccount")String userAccount, @Param("userPassword")String userPassword);
 
+    /**
+     * 根据分页条件查询用户信息
+     *
+     * @param user  查询条件
+     * @return 返回多条用户信息
+     */
+    List<User> selectUserList(User user);
+
+    /**
+     * 根据条件查询有多少个用户
+     * （根据数量进行分页显示）
+     *
+     * @param user 查询条件
+     * @return 用户数量
+     */
+    Integer countUsers(User user);
 }

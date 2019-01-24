@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.ResponseWrapper;
 
 @Controller
 @RequestMapping("/")
@@ -57,7 +56,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping("logout")
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate(); //清空session

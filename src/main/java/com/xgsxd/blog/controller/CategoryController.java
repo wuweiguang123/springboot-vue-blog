@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/category")
 public class CategoryController {
 
-    @RequestMapping("/category_tagsList")
+    @RequestMapping("/catagoryList")
+    public String catagoryList(){
+
+        return "category";
+    }
+
+    @RequestMapping("/queryCatagory") //标签
     public String selectCategoryAndTags(){
 
-        return "category_tags";
+        return "category";
     }
 }

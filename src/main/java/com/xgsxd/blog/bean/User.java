@@ -1,8 +1,10 @@
 package com.xgsxd.blog.bean;
 
+import com.xgsxd.utils.BaseBean;
+
 import java.util.Date;
 
-public class User {
+public class User extends BaseBean {
     private Integer userId;
 
     private String userName;
