@@ -12,6 +12,12 @@ public class Page {
 
     private List<?> pageData; //数据
 
+    public Page(Integer pageSize, Integer currentPage, Integer rows) {
+        this.pageSize = pageSize;
+        this.currentPage = currentPage;
+        this.rows = rows;
+    }
+
     public Integer getPageSize() {
         return pageSize;
     }
@@ -29,7 +35,8 @@ public class Page {
     }
 
     public Integer getStart() {
-        return start;
+
+        return PageUtil.countStart(this.pageSize,this.currentPage);
     }
 
     public void setStart(Integer start) {
@@ -37,7 +44,7 @@ public class Page {
     }
 
     public Integer getTotalPage() {
-        return totalPage;
+        return PageUtil.countTotalPage(this.rows, this.pageSize);
     }
 
     public void setTotalPage(Integer totalPage) {

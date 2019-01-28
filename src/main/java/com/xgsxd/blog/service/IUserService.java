@@ -1,6 +1,7 @@
 package com.xgsxd.blog.service;
 
 import com.xgsxd.blog.bean.User;
+import com.xgsxd.utils.Page;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface IUserService {
      * @param pageSize 每页大小
      * @return
      */
-    List<User> selectUserList(User user, Integer currentPage, Integer pageSize);
+    Page selectUserList(User user, Integer currentPage, Integer pageSize);
 
     /**
      * 根据条件查询有多少个用户

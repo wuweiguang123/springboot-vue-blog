@@ -31,7 +31,7 @@
       user_status = '1'
       <if test="userName != null and userName != ''">
         <bind name="userNamePatten" value="'%'+_parameter.userName+'%'"/>
-        and user_name = #{userNamePatten}
+        and user_name like #{userNamePatten}
       </if>
     </where>
     limit #{start}, #{length}
