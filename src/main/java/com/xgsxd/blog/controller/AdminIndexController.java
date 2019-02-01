@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminIndexController {
 
-    @RequestMapping("index")
+    @RequestMapping("/index")
     public String adminIndex(){
 
         return "index";

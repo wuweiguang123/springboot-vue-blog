@@ -19,7 +19,7 @@ public class Page {
     }
 
     public Integer getPageSize() {
-        return pageSize;
+        return this.pageSize;
     }
 
     public void setPageSize(Integer pageSize) {

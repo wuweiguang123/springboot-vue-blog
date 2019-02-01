@@ -1,123 +1,62 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:th="http://www.thymeleaf.org">
-
+<!doctype html>
+<html lang="zh-CN">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>登录</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Validator CSS -->
-    <!--<link href="dist/css/bootstrapValidator.css" rel="stylesheet">-->
-
-    <!-- MetisMenu CSS -->
-    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>博客管理系统</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="apple-touch-icon-precomposed" href="images/icon/icon.png">
+<link rel="shortcut icon" href="images/icon/favicon.ico">
+<script src="js/jquery-2.1.4.min.js"></script>
+<!--[if gte IE 9]>
+  <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="js/html5shiv.min.js" type="text/javascript"></script>
+  <script src="js/respond.min.js" type="text/javascript"></script>
+  <script src="js/selectivizr-min.js" type="text/javascript"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+  <script>window.location.href='upgrade-browser.html';</script>
+<![endif]-->
 </head>
 
-<body>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">你好，请登录</h3>
-                    </div>
-                    <div class="panel-body">
-                        <span th:text="${messageInfo}" style="color: red;"></span>
-                        <form id="loginForm" role="form" action="/doLogin" method="post">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="登录账号" name="userAccount" type="text" required>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="密码" name="userPassword" type="password" required>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">记住我
-                                    </label>
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <div class="form-group">
-                                    <button type="submit" name="submit" class="btn btn-lg btn-success btn-block">登录</button>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Bootstrap Validator JavaScript -->
-    <!--<script src="dist/js/bootstrapValidator.js"></script>
-    <script src="dist/js/zh_CN.js"></script>-->
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            /*$('#loginForm').bootstrapValidator({
-                message: 'This value is not valid',
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                fields: {
-                    userAccount: {
-                        message: 'The userAccount is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The username is required and cannot be empty'
-                            }
-                        }
-                    },
-                    userPassword: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The password is required and cannot be empty'
-                            }
-                        }
-                    }
-                }
-            });*/
-        });
-    </script>
-
+<body class="user-select">
+<div class="container">
+  <div class="siteIcon"><img src="images/icon/icon.png" alt="" data-toggle="tooltip" data-placement="top" title="欢迎使用博客管理系统" draggable="false" /></div>
+  <form action="/doLogin" method="post" autocomplete="off" class="form-signin">
+    <div style="color: red">${(messageInfo)!}</div>
+    <h2 class="form-signin-heading">你好，请登录</h2>
+    <label for="userAccount" class="sr-only">账号</label>
+    <input type="text" id="userAccount" name="userAccount" class="form-control" placeholder="请输入账号" required autofocus autocomplete="off" maxlength="10">
+    <label for="userPassword" class="sr-only">密码</label>
+    <input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="请输入密码" required autocomplete="off" maxlength="18">
+    <a href="main.html"><button class="btn btn-lg btn-primary btn-block" type="submit" id="signinSubmit">登录</button></a>
+  </form>
+  <div class="footer">
+    <p><a href="index.html" data-toggle="tooltip" data-placement="left" title="不知道自己在哪?">回到后台 →</a></p>
+  </div>
+</div>
+<script src="js/bootstrap.min.js"></script> 
+<script>
+$('[data-toggle="tooltip"]').tooltip();
+window.oncontextmenu = function(){
+	//return false;
+};
+$('.siteIcon img').click(function(){
+	window.location.reload();
+});
+$('#signinSubmit').click(function(){
+	if($('#userAccount').val() === ''){
+		$(this).text('账号不能为空');
+	}else if($('#userPassword').val() === ''){
+		$(this).text('密码不能为空');
+	}else{
+		$(this).text('请稍后...');
+	}
+});
+</script>
 </body>
-
 </html>

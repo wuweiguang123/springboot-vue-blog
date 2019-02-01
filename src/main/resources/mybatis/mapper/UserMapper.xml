@@ -72,8 +72,8 @@
       )
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
       #{userPhone,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, 
-      #{lastLoginTime,jdbcType=TIMESTAMP}, #{loginLocation,jdbcType=VARCHAR}, #{loginIpAddress,jdbcType=VARCHAR}
+      now(), 1 ,null,
+      null , null , null
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xgsxd.blog.bean.User">

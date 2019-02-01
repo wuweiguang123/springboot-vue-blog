@@ -14,6 +14,11 @@ public class PageUtil {
         return rows%pageSize == 0 ? rows/pageSize :  rows/pageSize+1;
     }
 
+    /**
+     * 计算当前页
+     * @param currentPage
+     * @return
+     */
     public static int countCurrentPage(Integer currentPage){
         if (currentPage == null){
             currentPage = 0;
@@ -22,6 +27,12 @@ public class PageUtil {
         return currentPage == 0 ? 1 : currentPage;
     }
 
+    /**
+     * 计算起始记录数
+     * @param pageSize
+     * @param currentPage
+     * @return
+     */
     public static int countStart(int pageSize, int currentPage){
 
         return pageSize * (currentPage - 1);

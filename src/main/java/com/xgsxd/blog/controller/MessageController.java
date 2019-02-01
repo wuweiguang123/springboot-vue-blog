@@ -10,6 +10,6 @@ public class MessageController {
     @RequestMapping("/messageList")
     public String selectMessageList() {
 
-        return "message";
+        return "comment";
     }
 }

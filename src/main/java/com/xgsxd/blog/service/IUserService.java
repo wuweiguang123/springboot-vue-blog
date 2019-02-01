@@ -36,4 +36,11 @@ public interface IUserService {
      */
     Integer countUsers(User user);
 
+    /**
+     * 用户添加
+     * @param record
+     * @return
+     */
+    int insert(User record);
+
 }

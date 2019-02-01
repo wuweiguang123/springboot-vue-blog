@@ -6,7 +6,7 @@ package com.xgsxd.utils;
  */
 public class Consant {
 
-     public static final int PAGE_SIZE = 5;
+     public static final int PAGE_SIZE = 2; //分页时每页显示的条数
 
 
 }
