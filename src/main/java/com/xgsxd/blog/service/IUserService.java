@@ -28,6 +28,13 @@ public interface IUserService {
     Page selectUserList(User user, Integer currentPage, Integer pageSize);
 
     /**
+     * 根据id查询
+     * @param userId
+     * @return
+     */
+    User findUserByUserId(Integer userId);
+
+    /**
      * 根据条件查询有多少个用户
      * （根据数量进行分页显示）
      *
@@ -42,5 +49,6 @@ public interface IUserService {
      * @return
      */
     int insert(User record);
+
 
 }

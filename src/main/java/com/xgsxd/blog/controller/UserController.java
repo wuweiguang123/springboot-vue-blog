@@ -3,10 +3,12 @@ package com.xgsxd.blog.controller;
 import com.xgsxd.blog.bean.User;
 import com.xgsxd.blog.service.IUserService;
 import com.xgsxd.utils.Consant;
+import com.xgsxd.utils.JSONResult;
 import com.xgsxd.utils.Page;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -32,7 +34,26 @@ public class UserController {
         return "manage-user";
     }
 
-    @RequestMapping("/add")
+    @ResponseBody
+    @RequestMapping(value = "/findUserById", method = RequestMethod.POST)
+    public JSONResult findUserById(Integer id){
+        JSONResult jsonResult = new JSONResult();
+
+
+        User user = userService.findUserByUserId(id);
+        if (user != null){
+            jsonResult.setStatus("success");
+            jsonResult.setData(user);
+            jsonResult.setMessage("请求成功");
+        } else{
+            jsonResult.setStatus("fail");
+            jsonResult.setMessage("请求数据错误");
+        }
+
+        return jsonResult;
+    }
+
+     @RequestMapping("/add")
      public String addUser(User  user, Model model){
         int flag = userService.insert(user);
 

@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>管理用户 - 博客管理系统</title>
 <#include "commons/default.html"/>
+<script src="/js/validator.min.js"></script>
 </head>
 
 <body class="user-select">
@@ -80,7 +81,7 @@
 <!--增加用户模态框-->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
   <div class="modal-dialog" role="document" style="max-width:450px;">
-    <form action="/admin/user/add" method="post" autocomplete="off" draggable="false">
+    <form action="/admin/user/add" method="post" autocomplete="off" draggable="false" role="form" data-toggle="validator">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -102,7 +103,10 @@
               </tr>
               <tr>
                   <td width="20%">邮箱</td>
-                  <td width="80%"><input type="email" value="" class="form-control" name="userEmail" maxlength="13" autocomplete="off" required/></td>
+                  <td width="80%"><input type="email" value="" class="form-control" name="userEmail" maxlength="13" autocomplete="off" required/>
+
+                  </td>
+                  <div class="help-block with-errors"></div>
               </tr>
               <tr>
                   <td wdith="20%">登录账号:</td>
@@ -110,11 +114,14 @@
               </tr>
               <tr>
                 <td wdith="20%">密码:</td>
-                <td width="80%"><input id="userPassword" type="password" class="form-control" name="userPassword" maxlength="16" autocomplete="off" required /></td>
+                <td width="80%"><input id="userPassword" type="password" class="form-control" name="userPassword" maxlength="16" autocomplete="off" required/></td>
               </tr>
               <tr>
                 <td wdith="20%">确认密码:</td>
-                <td width="80%"><input id="confirmPassword" type="password" class="form-control" name="confirmPassword" maxlength="16" autocomplete="off" required /></td>
+                <td width="80%"><input id="confirmPassword" type="password" class="form-control" name="confirmPassword" maxlength="16" autocomplete="off" required
+                                       data-match="#userPassword"
+                                       data-match-error="两次输入的密码不匹配！"/>
+                </td> <div class="help-block with-errors"></div>
               </tr>
             </tbody>
             <tfoot>
@@ -145,30 +152,19 @@
               <tr> </tr>
             </thead>
             <tbody>
-              <tr>
-                <td wdith="20%">姓名:</td>
-                <td width="80%"><input type="text" value="" class="form-control" id="truename" name="truename" maxlength="10" autocomplete="off" /></td>
-              </tr>
-              <tr>
-                <td wdith="20%">用户名:</td>
-                <td width="80%"><input type="text" value="" class="form-control" id="username" name="username" maxlength="10" autocomplete="off" /></td>
-              </tr>
-              <tr>
-                <td wdith="20%">电话:</td>
-                <td width="80%"><input type="text" value="" class="form-control" id="usertel" name="usertel" maxlength="13" autocomplete="off" /></td>
-              </tr>
-              <tr>
-                <td wdith="20%">旧密码:</td>
-                <td width="80%"><input type="password" class="form-control" name="old_password" maxlength="18" autocomplete="off" /></td>
-              </tr>
-              <tr>
-                <td wdith="20%">新密码:</td>
-                <td width="80%"><input type="password" class="form-control" name="password" maxlength="18" autocomplete="off" /></td>
-              </tr>
-              <tr>
-                <td wdith="20%">确认密码:</td>
-                <td width="80%"><input type="password" class="form-control" name="new_password" maxlength="18" autocomplete="off" /></td>
-              </tr>
+                <tr>
+                    <td wdith="20%">用户名:</td>
+                    <td width="80%"><input type="text" value="" class="form-control" id="userName" name="userName" maxlength="10" autocomplete="off" required /></td>
+                </tr>
+                <tr>
+                    <td wdith="20%">电话:</td>
+                    <td width="80%"><input type="text" value="" class="form-control" id="userPhone" name="userPhone" maxlength="13" autocomplete="off" required /></td>
+                </tr>
+                <tr>
+                    <td width="20%">邮箱</td>
+                    <td width="80%"><input type="email" value="" class="form-control" id="userEmail" name="userEmail" maxlength="13" autocomplete="off" required/></td>
+                    <div class="help-block with-errors"></div>
+                </tr>
             </tbody>
             <tfoot>
               <tr></tr>
@@ -176,7 +172,7 @@
           </table>
         </div>
         <div class="modal-footer">
-          <input type="hidden" name="userid" value="" />
+          <input type="hidden" name="userId" value="" />
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
           <button type="submit" class="btn btn-primary">提交</button>
         </div>
@@ -195,16 +191,20 @@ $(function () {
         if (name.attr("name") === "see") {
             $.ajax({
                 type: "POST",
-                url: "/User/see",
+                url: "/admin/user/findUserById",
                 data: "id=" + id,
                 cache: false, //不缓存此页面   
                 success: function (data) {
-                    var data = JSON.parse(data);
-					$('#truename').val(data.truename);
-					$('#username').val(data.username);
-					$('#usertel').val(data.usertel);
-					$('#userid').val(data.userid);
-                    $('#seeUser').modal('show');
+                    //var data = JSON.parse(data);
+                    if (data.status === "success") {
+                        $('#userName').val(data.data.userName);
+                        $('#userPhone').val(data.data.userPhone);
+                        $('#userEmail').val(data.data.userEmail);
+                        $('#userId').val(data.data.userId);
+                        $('#seeUser').modal('show');
+                    }else{
+                        console.log("请求数据出错");
+                    }
                 }
             });
         } else if (name.attr("name") === "delete") {

@@ -46,6 +46,12 @@ public class IUserServiceImpl implements IUserService {
     }
 
     @Override
+    public User findUserByUserId(Integer userId) {
+
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
     public int insert(User record) {
         int flag=userMapper.insert(record);
         if (flag>0){
