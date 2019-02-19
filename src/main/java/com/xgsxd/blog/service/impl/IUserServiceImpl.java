@@ -60,7 +60,23 @@ public class IUserServiceImpl implements IUserService {
 
             return 0;
         }
+    }
 
+    @Override
+    public int updateUserStatusByUserId(Integer userId) {
+        int flag = userMapper.updateUserStatusByUserId(userId);
+        if (flag > 0){
+            return flag;
+        }
+        return 0;
+    }
 
+    @Override
+    public int updateUser(User user) {
+        int flag = userMapper.updateByPrimaryKeySelective(user);
+        if (flag > 0){
+            return flag;
+        }
+        return 0;
     }
 }

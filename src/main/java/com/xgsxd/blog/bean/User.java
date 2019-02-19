@@ -21,14 +21,6 @@ public class User extends BaseBean {
 
     private String userStatus;
 
-    private Date loginTime;
-
-    private Date lastLoginTime;
-
-    private String loginLocation;
-
-    private String loginIpAddress;
-
     public Integer getUserId() {
         return userId;
     }
@@ -93,35 +85,4 @@ public class User extends BaseBean {
         this.userStatus = userStatus == null ? null : userStatus.trim();
     }
 
-    public Date getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(Date loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public String getLoginLocation() {
-        return loginLocation;
-    }
-
-    public void setLoginLocation(String loginLocation) {
-        this.loginLocation = loginLocation == null ? null : loginLocation.trim();
-    }
-
-    public String getLoginIpAddress() {
-        return loginIpAddress;
-    }
-
-    public void setLoginIpAddress(String loginIpAddress) {
-        this.loginIpAddress = loginIpAddress == null ? null : loginIpAddress.trim();
-    }
 }

@@ -50,5 +50,14 @@ public interface IUserService {
      */
     int insert(User record);
 
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
+    int updateUserStatusByUserId(Integer userId);
+
+    int updateUser(User user);
+
 
 }

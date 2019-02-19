@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class LoginController {
 
     @Resource
@@ -29,8 +29,8 @@ public class LoginController {
      * @return
      */
     @RequestMapping("login")
-    public String login(){
-
+    public String login(HttpSession session){
+        session.invalidate(); //清空session
         return  "login";
     }
 
@@ -46,22 +46,14 @@ public class LoginController {
         User user = userService.queryUserByUserAccountAndUserPwd(userAccount, userPassword);
         if(user != null){
             HttpSession session = request.getSession();
-            session.setAttribute("user",user);
-            model.addAttribute("userInfo", user);
-            return "index";
+            session.setAttribute("userInfo",user);
+
+            return "admin/index";
         }else{
             model.addAttribute("messageInfo", "用户名或密码错误");
             return "login";
         }
 
-    }
-
-    @RequestMapping("logout")
-    public String logout(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        session.invalidate(); //清空session
-
-        return "login";
     }
 
 }

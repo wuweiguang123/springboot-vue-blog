@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2019-01-07 16:14:07
+Date: 2019-02-19 16:44:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -65,7 +65,8 @@ CREATE TABLE `t_message` (
   `message_name` varchar(20) NOT NULL COMMENT '留言者姓名',
   `message_email` varchar(50) NOT NULL COMMENT '联系邮箱',
   `message_time` datetime NOT NULL COMMENT '留言时间',
-  `message_mark` varchar(2) DEFAULT NULL COMMENT '留言标记',
+  `read_mark` varchar(1) DEFAULT '' COMMENT '是否已读（0 未读，1 已读）',
+  `message_mark` varchar(2) DEFAULT NULL COMMENT '留言标记（-1审核没通过，0未审核，1审核通过）',
   PRIMARY KEY (`message_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -86,14 +87,17 @@ CREATE TABLE `t_user` (
   `user_password` varchar(20) NOT NULL COMMENT '用户密码',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `user_status` varchar(2) NOT NULL DEFAULT '1' COMMENT '用户状态：-1无效 1有效（默认有效）',
-  `login_time` datetime DEFAULT NULL,
-  `last_login_time` datetime DEFAULT NULL COMMENT '登录时间',
-  `login_location` varchar(20) DEFAULT NULL COMMENT '登录位置',
-  `login_ip_address` varchar(100) DEFAULT NULL COMMENT '登录IP',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_acc` (`user_account`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '管理员', '123@test.com', '13623230000', 'admin', '123456', '2018-12-31 23:56:35', '1', null, null, null, null);
+INSERT INTO `t_user` VALUES ('1', '管理员', '123@test.com', '13623230000', 'sdfgh', '123456', '2018-12-31 23:56:35', '1');
+INSERT INTO `t_user` VALUES ('2', '西瓜', '123@test.com', '15124680346', 'xg', '123456', '2019-01-25 11:12:37', '1');
+INSERT INTO `t_user` VALUES ('3', '柠檬', '123@test.com', '15232108258', 'nm', '123456', '2019-01-25 11:13:35', '1');
+INSERT INTO `t_user` VALUES ('4', '还硅胶', 'dfh@er.bn', '1321545645', 'jlkhjk', '1111111111', '2019-02-01 22:36:27', '1');
+INSERT INTO `t_user` VALUES ('5', 'hghgj', '1212@df.nm', '132115', '1212313', '454545454545', '2019-02-01 22:40:03', '1');
+INSERT INTO `t_user` VALUES ('6', 'sdsaa', 'sdas@a.com', 'sds', 'adsd', 'aaa', '2019-02-06 20:12:01', '1');
+INSERT INTO `t_user` VALUES ('8', 'ddd', '123@test.com', '12345567777', 'admmm', '123123', '2019-02-19 08:40:02', '1');

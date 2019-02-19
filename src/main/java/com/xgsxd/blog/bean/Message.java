@@ -15,6 +15,8 @@ public class Message {
 
     private String messageContent;
 
+    private String readMark;
+
     public Integer getMessageId() {
         return messageId;
     }
@@ -61,5 +63,13 @@ public class Message {
 
     public void setMessageContent(String messageContent) {
         this.messageContent = messageContent == null ? null : messageContent.trim();
+    }
+
+    public String getReadMark() {
+        return readMark;
+    }
+
+    public void setReadMark(String readMark) {
+        this.readMark = readMark;
     }
 }

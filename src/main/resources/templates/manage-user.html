@@ -17,6 +17,10 @@
     <#include "commons/aside.html"/>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
     <h1 class="page-header">操作</h1>
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            ${(message)!}
+        </div> <#-- 添加或修改成功时提示 -->
         <ol class="breadcrumb">
           <li><a data-toggle="modal" data-target="#addUser">增加用户</a></li>
         </ol>
@@ -47,8 +51,8 @@
                   <td>${(user.userAccount)!}</td>
                   <td></td>
                   <td>${(user.createTime?string('yyyy-MM-dd hh:mm:ss'))!}</td>
-                  <td>${(user.lastLoginTime?string('yyyy-MM-dd hh:mm:ss'))!}</td>
-                  <td>${(user.loginLocation)!}</td>
+                  <td></td>
+                  <td></td>
                   <td><a rel="1" name="see">修改</a> <a rel="1" name="delete">删除</a> <a href="/User/checked/id/1/action/n">禁用</a></td>
                 </tr>
               </#list>
@@ -106,7 +110,6 @@
                   <td width="80%"><input type="email" value="" class="form-control" name="userEmail" maxlength="13" autocomplete="off" required/>
 
                   </td>
-                  <div class="help-block with-errors"></div>
               </tr>
               <tr>
                   <td wdith="20%">登录账号:</td>
@@ -163,7 +166,6 @@
                 <tr>
                     <td width="20%">邮箱</td>
                     <td width="80%"><input type="email" value="" class="form-control" id="userEmail" name="userEmail" maxlength="13" autocomplete="off" required/></td>
-                    <div class="help-block with-errors"></div>
                 </tr>
             </tbody>
             <tfoot>
@@ -208,17 +210,23 @@ $(function () {
                 }
             });
         } else if (name.attr("name") === "delete") {
-            if (window.confirm("此操作不可逆，是否确认？")) {
+            //询问框
+            layer.confirm('确认删除吗？', {
+                btn: ['确认','取消'],
+                icon: 2
+            }, function(){
                 $.ajax({
                     type: "POST",
-                    url: "/User/delete",
+                    url: "/admin/user/delete",
                     data: "id=" + id,
-                    cache: false, //不缓存此页面   
+                    cache: false, //不缓存此页面
                     success: function (data) {
+                        layer.msg('删除成功', {icon: 1});
                         window.location.reload();
                     }
                 });
-            };
+            });
+
         };
     });
 });

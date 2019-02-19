@@ -6,17 +6,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>博客后台管理系统</title>
-<#include "/commons/default.html"/>
+<#include "commons/default.html"/>
 </head>
 
 <body class="user-select">
 <section class="container-fluid">
   <!-- header -->
-  <#include "/commons/header.html"/>
+  <#include "commons/header.html"/>
   <!-- header end  -->
   <div class="row">
     <!--  aside -->
-    <#include "/commons/aside.html"/>
+    <#include "commons/aside.html"/>
     <!-- aside end  -->
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
       <h1 class="page-header">信息总览</h1>
@@ -39,7 +39,7 @@
         <table class="table table-striped table-hover">
           <tbody>
             <tr>
-              <td>登录者: <span>admin</span>，这是您第 <span>13</span> 次登录</td>
+              <td>登录者: <span>${(userInfo.userName)!}</span>，这是您第 <span>13</span> 次登录</td>
             </tr>
             <tr>
               <td>上次登录时间: 2016-01-08 15:50:28 , 上次登录IP: ::1:55570</td>
@@ -58,22 +58,22 @@
               <td>管理员个数:</td>
               <td>2 人</td>
               <td>服务器软件:</td>
-              <td>Apache/2.4.10 (Win32) OpenSSL/1.0.1i mod_fcgid/2.3.9</td>
+              <td>Apache Tomcat 8.0 (Win64) </td>
             </tr>
             <tr>
               <td>浏览器:</td>
               <td>Chrome47</td>
-              <td>PHP版本:</td>
-              <td>5.6.1</td>
+              <td>Java版本:</td>
+              <td>1.8</td>
             </tr>
             <tr>
               <td>操作系统:</td>
               <td>Windows 10</td>
-              <td>PHP运行方式:</td>
-              <td>CGI-FCGI</td>
+              <td>JAVA运行方式:</td>
+              <td>JVM</td>
             </tr>
             <tr>
-              <td>登录者IP:</td>
+              <td>当前登录IP:</td>
               <td>::1:55570</td>
               <td>MYSQL版本:</td>
               <td>5.5.40</td>
@@ -88,7 +88,12 @@
               <td>程序编码:</td>
               <td>UTF-8</td>
               <td>当前时间:</td>
-              <td>2016-01-08 15:50:30</td>
+              <td id="time">
+                  <script>
+                  document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());
+                  setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+                  </script>
+              </td>
             </tr>
           </tbody>
           <tfoot>
@@ -105,7 +110,9 @@
               <td><span style="display:inline-block; width:8em">版权所有</span> POWERED BY WY ALL RIGHTS RESERVED</td>
             </tr>
             <tr>
-              <td><span style="display:inline-block;width:8em">页面加载时间</span> PROCESSED IN 1.0835s  SECONDS 更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></td>
+              <td>
+
+              </td>
             </tr>
           </tbody>
         </table>
@@ -114,8 +121,6 @@
     </div>
   </div>
 </section>
-
-  <#include "/commons/modalBox.html"/>
-
+<#include "commons/modalBox.html"/>
 </body>
 </html>

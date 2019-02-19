@@ -40,4 +40,12 @@ public interface UserMapper {
      * @return 用户数量
      */
     Integer countUsers(User user);
+
+    /**
+     * 删除用户
+     *
+     * @param userId
+     * @return
+     */
+    int updateUserStatusByUserId(Integer userId);
 }
