@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/message")
 public class MessageController {
 
-    @RequestMapping("/messageList")
+    @RequestMapping("/list")
     public String selectMessageList() {
 
         return "comment";
