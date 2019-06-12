@@ -1,5 +1,5 @@
 # blog
-## 基于SpringBoot+Freemarker的博客系统的后台管理部分
+## 基于SpringBoot+VUE的Blog系统（后端接口部分）
 ### 功能模块
 功能模块|功能介绍|备注
 --|--|--
